@@ -1,0 +1,22 @@
+.payForm {
+    display: flex;
+    width: 75%;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.col-item {
+    margin-bottom: 50px;
+}
+
+.cvv {
+    padding-left: 35px;
+}
+
+.card {
+    border: none
+}
+
+.send-btn {
+    margin: 0 auto;
+}
