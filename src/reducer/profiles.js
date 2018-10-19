@@ -3,7 +3,8 @@ import {LOAD_PERSONAL_DETAILS, START, SUCCESS, FAIL} from "../constants";
 const defaultState = {
     loading: false,
     loaded: false,
-    data: []
+    data: [],
+    isFirstLoading: true
 };
 
 export default (profiles=defaultState, action) => {
@@ -20,14 +21,16 @@ export default (profiles=defaultState, action) => {
             return {
                 loading: false,
                 loaded: true,
-                data: [...payload.data.profiles]
+                data: [...payload.data.profiles],
+                isFirstLoading: false
             };
 
         case LOAD_PERSONAL_DETAILS + FAIL:
             return {
                 loading: false,
                 loaded: false,
-                error: payload.error
+                error: payload.error,
+                isFirstLoading: true
             }
     }
     return profiles;

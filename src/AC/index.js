@@ -1,4 +1,4 @@
-import {LOAD_PERSONAL_DETAILS, START, SUCCESS, FAIL} from '../constants';
+import {LOAD_PERSONAL_DETAILS, START, SUCCESS, FAIL, CHANGING_CURRENT_BUTTON} from '../constants';
 import axios from 'axios';
 
 export function fetchPersonalDetails() {
@@ -24,6 +24,15 @@ export function fetchPersonalDetails() {
                 }));
         }, 1000)
 
+    }
+}
+
+export function changeCurrentButton(newButtonNumber) {
+    return {
+        type: CHANGING_CURRENT_BUTTON,
+        payload: {
+            newButtonNumber
+        }
     }
 }
 

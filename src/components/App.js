@@ -6,7 +6,9 @@ import Table from './Table/Table';
 class App extends Component {
     render() {
         return (
-            <Table />
+            <div className={'table-wrapper'}>
+                <Table />
+            </div>
         )
     }
 }

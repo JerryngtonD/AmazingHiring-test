@@ -1,0 +1,10 @@
+.pagination {
+    width: 300px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.table-wrapper__pagination {
+    margin-bottom: 50px;
+    margin-right: 50px;
+}

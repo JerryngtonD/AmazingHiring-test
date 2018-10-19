@@ -1,0 +1,8 @@
+.activeButton {
+    background-color: slategrey;
+}
+.paginationButton {
+    border-style:  none;
+    width: 30px;
+    height: 30px;
+}

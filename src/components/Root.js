@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import App from './App';
-import store from '../store';
+import storeObject from '../store';
 import {Provider} from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
 
 
 function Root() {
     return (
-        <Provider store = {store}>
-            <App />
+        <Provider store = {storeObject.store}>
+            {/*<PersistGate loading={null} persistor={storeObject.persistor}>*/}
+                <App />
+          {/*  </PersistGate>*/}
         </Provider>
     );
 }
