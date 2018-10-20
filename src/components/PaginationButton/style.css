@@ -1,9 +1,23 @@
-.activeButton {
-    background-color: slategrey;
-}
 .paginationButton {
+    outline: none;
     border-style:  none;
     width: 30px;
     height: 30px;
     cursor: pointer;
+    border-radius: 5px;
+}
+
+.paginationButton:hover {
+    background-color: #318BC3;
+    color: white;
+}
+
+
+.activeButton {
+    background-color: #319cb7;
+    color: white;
+}
+
+.activeButton:hover {
+    background-color: #319cb7;
 }

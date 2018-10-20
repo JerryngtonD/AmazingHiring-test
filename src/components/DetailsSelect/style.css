@@ -1,0 +1,21 @@
+.detailsSelectButton {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: 1px solid #b8b8b8;
+    border-radius: 5px;
+    outline: none;
+}
+
+.activeNumberDetails {
+    border-color: #1fbba6;
+}
+
+.detailsSelectButton:hover {
+    background-color: #efefef;
+
+}
+
+.activeNumberDetails:hover {
+    background-color: #b5e5de;
+}

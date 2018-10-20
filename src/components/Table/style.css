@@ -1,6 +1,7 @@
 table {
     border-collapse: collapse;
-    margin: 0 auto;
+    margin: 50px auto 10px auto;
+    width: 100%;
 }
 
 td {
@@ -8,12 +9,22 @@ td {
 }
 
 tr:nth-child(2n) {
-    background-color: lightgrey;
+    background-color: rgba(0, 102, 161, 0.2);
 }
 
 .contentWrapper {
+    max-width: 1000px;
+    margin: 0 auto;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-around;
+}
+
+.changeNumberProfiles .detailsSelectButton:not(:last-child) {
+    margin-right: 10px;
+}
+
+.changeNumberProfiles {
+    margin-right: auto;
 }

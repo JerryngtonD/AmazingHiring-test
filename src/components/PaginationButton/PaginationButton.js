@@ -14,7 +14,7 @@ class PaginationButton extends React.Component {
 
     render() {
         const {counterPage, currentPage} = this.props;
-        const activeClass = counterPage == currentPage ? 'activeButton' : '';
+            let activeClass = counterPage === currentPage ? 'activeButton' : '';
 
         return (
             <button className={'paginationButton' + ' ' + activeClass} onClick={this.changeCurrentButton}>{counterPage}</button>
@@ -24,7 +24,8 @@ class PaginationButton extends React.Component {
 
 export default connect((state) => {
     return {
-        currentPage: state.paginator.currentPage
+        currentPage: state.paginator.currentPage,
+
     }
 }, {changeCurrentButton})(PaginationButton);
 

@@ -4,11 +4,11 @@ import './style.css';
 import {connect} from 'react-redux';
 import {fetchPersonalDetails} from "../../AC";
 
+import Loader from '../Loader/Loader'
 import DataRow from '../DataRow/DataRow';
 import HeaderCell from '../HeaderCell/HeaderCell';
 import Pagination from '../Pagination/Pagination';
-
-
+import DetailsSelect from '../DetailsSelect/DetailsSelect';
 
 
 class Table extends React.Component {
@@ -21,11 +21,11 @@ class Table extends React.Component {
     }
 
     render() {
-        const {loaded, profiles, currentPage, profilesPerPage, numberOfPage} = this.props;
+        const {loaded, profiles, currentPage, profilesPerPage, chosenProfilesPerPage} = this.props;
 
         if (!loaded) {
             return (
-                <div>...Loading</div>
+                <Loader/>
             );
         }
 
@@ -33,27 +33,35 @@ class Table extends React.Component {
             <HeaderCell headerTitle={header} />
         );
 
-/*        const dataLines = profiles.map(profile =>
-            <DataRow dataDetails={Object.values(profile)}/>
-        );*/
+        const showMoreDetailsButtons = [];
+        const numberOfButtons = 3;
+        for (let buttonIdx = 0; buttonIdx < numberOfButtons; buttonIdx++) {
+            showMoreDetailsButtons.push(
+                <DetailsSelect detailsOnPage={profilesPerPage * (buttonIdx + 1)}/>
+            )
+        }
 
         const dataLines = [];
-        if (profiles.length - currentPage * profilesPerPage > profilesPerPage) {
-            for (let initialProfileIdx = profilesPerPage * (currentPage - 1); initialProfileIdx < currentPage * profilesPerPage; initialProfileIdx++) {
+        if (profiles.length - currentPage * chosenProfilesPerPage > profilesPerPage) {
+            for (let initialProfileIdx = chosenProfilesPerPage * (currentPage - 1); initialProfileIdx < currentPage * chosenProfilesPerPage; initialProfileIdx++) {
                 dataLines.push(
                     <DataRow dataDetails={Object.values(profiles[initialProfileIdx])}/>
                 )
             }
         } else {
-            for (let initialProfileIdx = profilesPerPage * (currentPage - 1); initialProfileIdx < profiles.length; initialProfileIdx++) {
+            for (let initialProfileIdx = chosenProfilesPerPage * (currentPage - 1); initialProfileIdx < profiles.length; initialProfileIdx++) {
                 dataLines.push(
                     <DataRow dataDetails={Object.values(profiles[initialProfileIdx])}/>
                 )
             }
         }
 
+
         return (
             <div className={'contentWrapper'}>
+                <div className={'changeNumberProfiles'}>
+                    {showMoreDetailsButtons}
+                </div>
                 <Pagination />
                 <table>
                     <tbody>
@@ -76,6 +84,7 @@ export default connect((state) => {
         isFirstLoading: state.profiles.isFirstLoading,
         currentPage: state.paginator.currentPage,
         profilesPerPage: state.paginator.profilesPerPage,
-        numberOfPage: state.paginator.numberOfPage
+        numberOfPage: state.paginator.numberOfPage,
+        chosenProfilesPerPage: state.paginator.chosenProfilesPerPage
     }
 }, {fetchPersonalDetails})(Table);
