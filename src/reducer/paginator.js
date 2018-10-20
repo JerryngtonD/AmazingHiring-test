@@ -3,7 +3,7 @@ import {LOAD_PERSONAL_DETAILS, SUCCESS, CHANGING_CURRENT_BUTTON} from "../consta
 const defaultState = {
     numberOfPage: 0,
     currentPage: 1,
-    profilesPerPage: 15
+    profilesPerPage: 30
 };
 
 export default (pagination=defaultState, action) => {

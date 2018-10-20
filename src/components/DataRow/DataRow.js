@@ -6,7 +6,7 @@ class DataRow extends React.Component {
     render() {
         const {dataDetails} = this.props;
         const dataChunks = dataDetails.map(dataDetail =>
-            <td>{dataDetail}</td>
+            <td className={'personalDetailCell'}>{dataDetail}</td>
         );
         return (
             <tr>

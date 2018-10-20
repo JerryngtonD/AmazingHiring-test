@@ -12,7 +12,7 @@ class HeaderCell extends React.Component {
         const {headerTitle} = this.props;
 
         return (
-            <th key={this.getHash(headerTitle)}>{headerTitle}</th>
+            <th className={'tableTitle'} key={this.getHash(headerTitle)}>{headerTitle}</th>
         );
     }
 }
