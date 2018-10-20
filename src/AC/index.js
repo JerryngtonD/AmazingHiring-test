@@ -1,4 +1,4 @@
-import {LOAD_PERSONAL_DETAILS, START, SUCCESS, FAIL, CHANGING_CURRENT_BUTTON, CHANGING_NUMBER_PROFILES_ON_PAGE} from '../constants';
+import {LOAD_PERSONAL_DETAILS, START, SUCCESS, FAIL, CHANGING_CURRENT_BUTTON, CHANGING_NUMBER_PROFILES_ON_PAGE, SORTING_PERSONAL_DETAILS} from '../constants';
 import axios from 'axios';
 
 export function fetchPersonalDetails() {
@@ -22,7 +22,7 @@ export function fetchPersonalDetails() {
                         error
                     }
                 }));
-        }, 3000)
+        }, 2000)
 
     }
 }
@@ -42,6 +42,16 @@ export function changeNumberProfilesOnPage(newProfilesOnPage, newNumberOfPage) {
         payload: {
             newProfilesOnPage,
             newNumberOfPage
+        }
+    }
+}
+
+export function sortProfilesOnPage(sortedPersonalDetails, sortedByField) {
+    return {
+        type: SORTING_PERSONAL_DETAILS,
+        payload: {
+            sortedPersonalDetails,
+            sortedByField
         }
     }
 }

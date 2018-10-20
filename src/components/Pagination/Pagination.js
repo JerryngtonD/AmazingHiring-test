@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 import PaginationButton from '../PaginationButton/PaginationButton';
 
+import {getHash} from "../../helpers";
 
 
 class Pagination extends React.Component {
@@ -14,7 +15,7 @@ class Pagination extends React.Component {
         const paginationButtons = [];
         for (let idx = 0; idx < numberOfPage; idx++) {
             paginationButtons.push(
-                <PaginationButton counterPage={idx+1}/>
+                <PaginationButton counterPage={idx+1} key={getHash(idx.toString())}/>
             )
         }
 

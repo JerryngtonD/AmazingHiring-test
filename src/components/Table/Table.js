@@ -9,6 +9,7 @@ import DataRow from '../DataRow/DataRow';
 import HeaderCell from '../HeaderCell/HeaderCell';
 import Pagination from '../Pagination/Pagination';
 import DetailsSelect from '../DetailsSelect/DetailsSelect';
+import {getHash} from "../../helpers";
 
 
 class Table extends React.Component {
@@ -21,7 +22,7 @@ class Table extends React.Component {
     }
 
     render() {
-        const {loaded, profiles, currentPage, profilesPerPage, chosenProfilesPerPage} = this.props;
+        let {loaded, profiles, currentPage, profilesPerPage, chosenProfilesPerPage} = this.props;
 
         if (!loaded) {
             return (
@@ -30,14 +31,14 @@ class Table extends React.Component {
         }
 
         const headers = Object.getOwnPropertyNames(profiles[0]).map(header =>
-            <HeaderCell headerTitle={header} />
+            <HeaderCell headerTitle={header} key={getHash(header)} />
         );
 
         const showMoreDetailsButtons = [];
         const numberOfButtons = 3;
         for (let buttonIdx = 0; buttonIdx < numberOfButtons; buttonIdx++) {
             showMoreDetailsButtons.push(
-                <DetailsSelect detailsOnPage={profilesPerPage * (buttonIdx + 1)}/>
+                <DetailsSelect key={getHash(buttonIdx.toString())} detailsOnPage={profilesPerPage * (buttonIdx + 1)}/>
             )
         }
 
@@ -45,13 +46,13 @@ class Table extends React.Component {
         if (profiles.length - currentPage * chosenProfilesPerPage > profilesPerPage) {
             for (let initialProfileIdx = chosenProfilesPerPage * (currentPage - 1); initialProfileIdx < currentPage * chosenProfilesPerPage; initialProfileIdx++) {
                 dataLines.push(
-                    <DataRow dataDetails={Object.values(profiles[initialProfileIdx])}/>
+                    <DataRow dataDetails={Object.values(profiles[initialProfileIdx])} key={initialProfileIdx.toString()}/>
                 )
             }
         } else {
             for (let initialProfileIdx = chosenProfilesPerPage * (currentPage - 1); initialProfileIdx < profiles.length; initialProfileIdx++) {
                 dataLines.push(
-                    <DataRow dataDetails={Object.values(profiles[initialProfileIdx])}/>
+                    <DataRow dataDetails={Object.values(profiles[initialProfileIdx])} key={initialProfileIdx.toString()}/>
                 )
             }
         }

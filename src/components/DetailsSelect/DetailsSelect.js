@@ -27,7 +27,7 @@ class DetailsSelect extends React.Component {
         const activeModeDetails = detailsOnPage === currentProfilesPerPage ? 'activeNumberDetails' : '';
 
         return (
-            <button className={'detailsSelectButton' + ' ' + activeModeDetails} onClick={this.changeDetailsOnPage}>{detailsOnPage}</button>
+            <button className={'detailsSelectButton' + ' ' + activeModeDetails}  onClick={this.changeDetailsOnPage}>{detailsOnPage}</button>
         );
     }
 }

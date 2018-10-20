@@ -15,7 +15,7 @@ export default (pagination=defaultState, action) => {
 
         case LOAD_PERSONAL_DETAILS + SUCCESS:
             return {
-                ...defaultState,
+                ...pagination,
                 numberOfProfiles: payload.data.profiles.length,
                 numberOfPage: Math.ceil(payload.data.profiles.length / defaultState.chosenProfilesPerPage)
             };
@@ -32,7 +32,6 @@ export default (pagination=defaultState, action) => {
                 chosenProfilesPerPage: payload.newProfilesOnPage,
                 numberOfPage: payload.newNumberOfPage
             };
-
     }
 
     return pagination;
