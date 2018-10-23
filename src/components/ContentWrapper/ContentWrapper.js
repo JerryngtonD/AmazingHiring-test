@@ -7,10 +7,7 @@ import {fetchPersonalDetails} from "../../AC";
 import Loader from '../Loader/Loader'
 import Pagination from '../Pagination/Pagination';
 import Table from '../Table/Table'
-import HeaderCell from "../HeaderCell/HeaderCell";
-import {getHash} from '../../helpers';
-import DataRow from '../DataRow/DataRow';
-import DetailsSelect from '../DetailsSelect/DetailsSelect'
+import RangeProfiles from '../RangeProfiles/RangeProfiles'
 
 
 
@@ -24,7 +21,8 @@ class ContentWrapper extends React.Component {
     }
 
     render() {
-        let {loaded, profiles, currentPage, profilesPerPage, chosenProfilesPerPage} = this.props;
+        let {loaded, profiles} = this.props;
+        const numberOfButtons = 3;
 
         if (!loaded) {
             return (
@@ -32,31 +30,11 @@ class ContentWrapper extends React.Component {
             );
         }
 
-        const numberOfButtons = 3;
-        const showMoreDetailsButtons = [...Array(numberOfButtons)].map((_, i) =>
-            <DetailsSelect key={`option-${i}`} detailsOnPage={profilesPerPage * (i + 1)} />
-        );
-
-        const headers = Object.getOwnPropertyNames(profiles[0]).map(header =>
-            <HeaderCell headerTitle={header} key={getHash(header)} />
-        );
-
-        const dataLines = [];
-        const beginIndex = chosenProfilesPerPage * (currentPage - 1);
-        const endIndex = Math.min(currentPage * chosenProfilesPerPage + profilesPerPage, profiles.length);
-        for (let initialProfileIdx = beginIndex; initialProfileIdx < endIndex; initialProfileIdx++) {
-            dataLines.push(
-                <DataRow dataDetails={Object.values(profiles[initialProfileIdx])} key={initialProfileIdx.toString()}/>
-            )
-        }
-
         return (
             <div className={'contentWrapper'}>
-                <div className={'changeNumberProfiles'}>
-                    {showMoreDetailsButtons}
-                </div>
+                <RangeProfiles numberOfButtons={numberOfButtons}/>
                 <Pagination />
-                <Table headers={headers} dataLines={dataLines}/>
+                <Table columnTitles={profiles[0]} dataObjects={profiles}/>
             </div>
         );
     }
