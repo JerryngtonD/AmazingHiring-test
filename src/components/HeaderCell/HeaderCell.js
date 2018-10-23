@@ -35,9 +35,8 @@ class HeaderCell extends React.Component {
         };
     };
 
-    sortByHeader = (header) => {
+    sortByHeader = (sortBy) => {
         const {profiles, sortProfilesOnPage} = this.props;
-        const sortBy = header.target.innerHTML;
         const sortedProfiles = profiles.sort(this.dynamicSort(sortBy));
         this.toggleIsClicked();
         sortProfilesOnPage(sortedProfiles, sortBy);
@@ -49,7 +48,7 @@ class HeaderCell extends React.Component {
         const {headerTitle} = this.props;
 
         return (
-            <th className={'tableTitle'}  onClick={this.sortByHeader}>{headerTitle}</th>
+            <th className={'tableTitle'}  onClick={() => this.sortByHeader(headerTitle)}>{headerTitle}</th>
         );
     }
 }
