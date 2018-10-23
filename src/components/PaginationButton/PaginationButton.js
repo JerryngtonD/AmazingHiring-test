@@ -5,11 +5,9 @@ import {changeCurrentButton} from "../../AC";
 
 class PaginationButton extends React.Component {
 
-    changeCurrentButton = (event) => {
+    changeCurrentButton = (counterPage) => {
         const {changeCurrentButton} = this.props;
-        const clickedButton = event.target;
-        const numberClickedButton = parseInt(clickedButton.innerHTML, 10);
-        changeCurrentButton(numberClickedButton);
+        changeCurrentButton(counterPage);
     };
 
     render() {
@@ -17,7 +15,7 @@ class PaginationButton extends React.Component {
             let activeClass = counterPage === currentPage ? 'activeButton' : '';
 
         return (
-            <button className={'paginationButton' + ' ' + activeClass} onClick={this.changeCurrentButton}>{counterPage}</button>
+            <button className={'paginationButton' + ' ' + activeClass} onClick={() => this.changeCurrentButton(counterPage)}>{counterPage}</button>
         );
     }
 }

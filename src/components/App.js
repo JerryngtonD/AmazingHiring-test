@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import './style.css';
-import Table from './Table/Table';
+import ContentWrapper from './ContentWrapper/ContentWrapper';
 
 
 class App extends Component {
     render() {
         return (
             <div className={'table-wrapper'}>
-                <Table />
+                <ContentWrapper />
             </div>
         )
     }

@@ -1,69 +1,11 @@
 import React, { Component } from 'react';
 import './style.css';
 
-import {connect} from 'react-redux';
-import {fetchPersonalDetails} from "../../AC";
-
-import Loader from '../Loader/Loader'
-import DataRow from '../DataRow/DataRow';
-import HeaderCell from '../HeaderCell/HeaderCell';
-import Pagination from '../Pagination/Pagination';
-import DetailsSelect from '../DetailsSelect/DetailsSelect';
-import {getHash} from "../../helpers";
-
-
 class Table extends React.Component {
 
-    componentDidMount() {
-        const {loaded, loading, isFirstLoading, fetchPersonalDetails} = this.props;
-        if((!loaded || !loading) && isFirstLoading) {
-            fetchPersonalDetails();
-        }
-    }
-
     render() {
-        let {loaded, profiles, currentPage, profilesPerPage, chosenProfilesPerPage} = this.props;
-
-        if (!loaded) {
-            return (
-                <Loader/>
-            );
-        }
-
-        const headers = Object.getOwnPropertyNames(profiles[0]).map(header =>
-            <HeaderCell headerTitle={header} key={getHash(header)} />
-        );
-
-        const showMoreDetailsButtons = [];
-        const numberOfButtons = 3;
-        for (let buttonIdx = 0; buttonIdx < numberOfButtons; buttonIdx++) {
-            showMoreDetailsButtons.push(
-                <DetailsSelect key={getHash(buttonIdx.toString())} detailsOnPage={profilesPerPage * (buttonIdx + 1)}/>
-            )
-        }
-
-        const dataLines = [];
-        if (profiles.length - currentPage * chosenProfilesPerPage > profilesPerPage) {
-            for (let initialProfileIdx = chosenProfilesPerPage * (currentPage - 1); initialProfileIdx < currentPage * chosenProfilesPerPage; initialProfileIdx++) {
-                dataLines.push(
-                    <DataRow dataDetails={Object.values(profiles[initialProfileIdx])} key={initialProfileIdx.toString()}/>
-                )
-            }
-        } else {
-            for (let initialProfileIdx = chosenProfilesPerPage * (currentPage - 1); initialProfileIdx < profiles.length; initialProfileIdx++) {
-                dataLines.push(
-                    <DataRow dataDetails={Object.values(profiles[initialProfileIdx])} key={initialProfileIdx.toString()}/>
-                )
-            }
-        }
-
-
+        let {headers, dataLines} = this.props;
         return (
-            <div className={'contentWrapper'}>
-                <div className={'changeNumberProfiles'}>
-                    {showMoreDetailsButtons}
-                </div>
-                <Pagination />
                 <table>
                     <tbody>
                         <tr>
@@ -72,20 +14,8 @@ class Table extends React.Component {
                         {dataLines}
                     </tbody>
                 </table>
-            </div>
         );
     }
 }
 
-export default connect((state) => {
-    return {
-        profiles: state.profiles.data,
-        loading: state.profiles.loading,
-        loaded: state.profiles.loaded,
-        isFirstLoading: state.profiles.isFirstLoading,
-        currentPage: state.paginator.currentPage,
-        profilesPerPage: state.paginator.profilesPerPage,
-        numberOfPage: state.paginator.numberOfPage,
-        chosenProfilesPerPage: state.paginator.chosenProfilesPerPage
-    }
-}, {fetchPersonalDetails})(Table);
+export default Table;
