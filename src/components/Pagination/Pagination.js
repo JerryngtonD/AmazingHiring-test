@@ -6,18 +6,16 @@ import {connect} from 'react-redux';
 import PaginationButton from '../PaginationButton/PaginationButton';
 
 import {getHash} from "../../helpers";
+import DetailsSelect from "../DetailsSelect/DetailsSelect";
 
 
 class Pagination extends React.Component {
 
     render() {
         const {numberOfPage} = this.props;
-        const paginationButtons = [];
-        for (let idx = 0; idx < numberOfPage; idx++) {
-            paginationButtons.push(
-                <PaginationButton counterPage={idx+1} key={getHash(idx.toString())}/>
-            )
-        }
+        const paginationButtons = [...Array(numberOfPage)].map((_, i) =>
+            <PaginationButton counterPage={i+1} key={getHash(i.toString())} />
+        );
 
         return (
            <div className={'pagination' + ' ' + 'table-wrapper__pagination'}>
